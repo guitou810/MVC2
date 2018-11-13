@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,25 +14,22 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form>
-            
-            <input name="taux" type="number" step="0.01" min="0.0" max="99.99" size="5">
-            
+        <h1>COUCOU</h1>
+        <h1>la taille ${taille}</h1>
 
-            
-            
-            
-            
-        <input type='submit'>
-        </form>
-            <table border=2>
-        <tr> <th>Code</th> <th>taux</th> <th>DELETE</th> </tr>
-        <c:forEach var="code" items="${codes}">
-            <tr> <td>${code.GetLettre}</td> <td>${code.GetPourcentage}</td> <td><a href="?action=DELETE&code=B">delete</a></td> </tr>
-        </c:forEach>
-    </table>
-        
-        
-    </body>
+        <table border=2>
+            <tr> <th>Id</th> <th>Name</th> <th>Supprimer</th></tr>
+
+            <c:forEach items="${codes}" var="element"> 
+                <tr> 
+                    <td>${element.lettre}</td> 
+                    <td> <fmt:formatNumber minIntegerDigits="2" minFractionDigits="2" maxFractionDigits="2" value="${element.pourcentage}"/> % </td> 
+            <td><a href="?action=DELETE&code=${element.lettre}" >delete</a></td>
+
+        </tr>
+    </c:forEach>
+</table>
+<div><h4></h4></div>
+
+</body>
 </html>
