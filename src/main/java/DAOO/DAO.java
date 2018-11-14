@@ -39,10 +39,10 @@ public class DAO {
 			try (ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) { // Tant qu'il y a des enregistrements
 					// On récupère les champs nécessaires de l'enregistrement courant
-					int code = (char) rs.getObject("DISCOUNT_CODE");
+					String code = rs.getString("DISCOUNT_CODE");
 					float po = rs.getFloat("RATE");
 					// On crée l'objet entité
-					Discount_Code c = new Discount_Code((char) code,po);
+					Discount_Code c = new Discount_Code(code,po);
 					// On l'ajoute à la liste des résultats
 					result.add(c);
 				}
@@ -57,11 +57,11 @@ public class DAO {
         }
         
         
-        public void supprCode(char code) throws DAOException{
-            String sql = "DELETE FROM DISCOUNT_CODE WHERE DISCOUNT_CODE";
+        public void supprCode(String code) throws DAOException{
+            String sql = "DELETE FROM DISCOUNT_CODE WHERE DISCOUNT_CODE=?";
             try (Connection connection = myDataSource.getConnection(); // On crée un statement pour exécuter une requête
             PreparedStatement stmt = connection.prepareStatement(sql)){
-                    stmt.setString(1, Character.toString(code));
+                    stmt.setString(1, code);
                     stmt.executeUpdate();
 			
 		}  catch (SQLException ex) {
@@ -70,11 +70,11 @@ public class DAO {
 		}
         }
         
-        public void addCode(char code,float val) throws DAOException{
+        public void addCode(String code,float val) throws DAOException{
             String sql = "INSERT INTO DISCOUNT_CODE (DISCOUNT_CODE,RATE) VALUES (?,?)";
             try (Connection connection = myDataSource.getConnection(); // On crée un statement pour exécuter une requête
             PreparedStatement stmt = connection.prepareStatement(sql)){
-                    stmt.setString(1, Character.toString(code));
+                    stmt.setString(1, code);
                     stmt.setFloat(2, val);
                     stmt.executeUpdate();
 			

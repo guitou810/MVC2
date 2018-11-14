@@ -11,19 +11,22 @@ package DAOO;
  */
 public class Discount_Code {
     private float pourcentage ;
-    private char lettre;
+    private String lettre;
       
-    public Discount_Code(char lettre,float pourcentage){
-        this.lettre= lettre;
+    public Discount_Code(String l,float pourcentage){
+        this.lettre= l;
         this.pourcentage=pourcentage;
     }
     
     
-    public float GetPourcentage(){
-        return pourcentage;
+    public float getPourcentage(){
+        return this.pourcentage;
     }
+
+    public String getLettre() {
+        return this.lettre;
+        }
     
-    public char GetLettre(){
-        return lettre;
-    }
+    
+
 }
